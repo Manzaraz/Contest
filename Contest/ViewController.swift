@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBAction func enterButtonDidTouchUpInside(_ sender: Any) {
         if emailTextField.text?.isEmpty == true {
             performLabTextFieldShakeAnimation()
+            performChallengeTextFieldShakeAnimation()
         } else {
             performSegue(withIdentifier: "toEnteredView", sender: nil)
         }
@@ -33,6 +34,39 @@ class ViewController: UIViewController {
                 self.emailTextField.transform = CGAffineTransform.identity
             })
         }
+    }
+
+    private func performChallengeTextFieldShakeAnimation() {
+        let dur = 0.1667
+        UIView.animateKeyframes(withDuration: 1, delay: 0, options: [],
+                                animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.0,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform(rotationAngle: -.pi/8)
+            }
+            UIView.addKeyframe(withRelativeStartTime: dur,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform(rotationAngle: +.pi/8)
+            }
+            UIView.addKeyframe(withRelativeStartTime: dur*2,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform(rotationAngle: -.pi/8)
+            }
+            UIView.addKeyframe(withRelativeStartTime: dur*3,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform(rotationAngle: +.pi/8)
+            }
+            UIView.addKeyframe(withRelativeStartTime: dur*4,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform(rotationAngle: -.pi/8)
+            }
+            UIView.addKeyframe(withRelativeStartTime: dur*5,
+                               relativeDuration: dur) {
+                self.emailTextField.transform = CGAffineTransform.identity
+            }
+        },
+                                completion: nil
+        )
     }
 }
 
